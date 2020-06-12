@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import TodoList from "./todo/TodoList";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 
     return (
 
-        <div className='wrapper'>
+        <div className="wrapper">
             <h1>My todo-list</h1>
 
             <TodoList todoItems={todoItems}/>
