@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types"
-
-const styles = {
-    form: {
-    }
-}
+import "./CreateTodoItemForm.css"
 
 function useInput(defaultValue = "") {
     const [value, setValue] = useState(defaultValue)
@@ -37,9 +33,11 @@ function CreateTodoItem({ createTodoItem }) {
     }
 
     return (
-        <form style={styles.form} onSubmit={submitHandler}>
-            <input {...title.bind} />
-            <input {...description.bind} />
+        <form onSubmit={submitHandler}>
+            <label>Title:</label>
+            <input {...title.bind} placeholder="Enter title" />
+            <label>Description:</label>
+            <input {...description.bind} placeholder="Enter description" />
             <button type={"submit"}>Add to-do</button>
         </form>
     )
