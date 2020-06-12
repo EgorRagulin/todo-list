@@ -17,3 +17,15 @@ code {
   width: 1000px;
   height: 100%;
 }
+
+.remove-btn {
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  border: none;
+}
+
+.remove-btn:hover {
+  opacity: 50%;
+  cursor: pointer;
+}
