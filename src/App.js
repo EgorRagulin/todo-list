@@ -2,6 +2,7 @@ import React from "react";
 import TodoList from "./todo/TodoList";
 import Context from "./context";
 import TodoListIsEmpty from "./todo/TodoListIsEmpty";
+import CreateTodoItem from "./todo/CreateTodoItem";
 
 function App() {
     const [todoItems, setTodoItems] = React.useState([
@@ -20,8 +21,33 @@ function App() {
         )
     }
 
+    function createTodoItem(title, description) {
+        const id = generateUniqueId()
+
+        setTodoItems(
+            todoItems.concat([{
+                id,
+                title,
+                description,
+                completed: false
+            }])
+        )
+    }
+
     function removeTodoItem(id) {
         setTodoItems(todoItems.filter(todoItem => todoItem.id !== id))
+    }
+
+    function generateUniqueId() {
+        let maxTodoItemId = 0
+
+        if (todoItems.length > 0) {
+            todoItems.forEach((todoItem => {
+                if(maxTodoItemId < todoItem.id) maxTodoItemId = todoItem.id
+            }))
+        }
+
+        return maxTodoItemId + 1
     }
 
     return (
@@ -34,7 +60,7 @@ function App() {
                     <TodoList todoItems={todoItems} onChangeTodoItemSelection={toggleTodoItem}/>
                 }
 
-
+                <CreateTodoItem createTodoItem={createTodoItem}></CreateTodoItem>
             </div>
         </Context.Provider>
     );
