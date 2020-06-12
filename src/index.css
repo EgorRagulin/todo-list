@@ -29,3 +29,11 @@ code {
   opacity: 50%;
   cursor: pointer;
 }
+
+.todo-item-checkbox:hover {
+  cursor: pointer;
+}
+
+.todo-is-done {
+  text-decoration: line-through red;
+}
