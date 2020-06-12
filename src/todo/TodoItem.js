@@ -28,7 +28,7 @@ function TodoItem({ todoItem, index, onChangeTodoItemSelection }) {
             <span className={classes.join(" ")}>
                 <input
                     type="checkbox"
-                    capture={todoItem.completed}
+                    checked={todoItem.completed}
                     style={styles.input}
                     className={"todo-item-checkbox"}
                     onChange={() => onChangeTodoItemSelection(todoItem.id)}

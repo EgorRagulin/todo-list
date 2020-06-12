@@ -3,40 +3,48 @@ import TodoList from "./todo/TodoList";
 import Context from "./context";
 import TodoListIsEmpty from "./todo/TodoListIsEmpty";
 import CreateTodoItem from "./todo/CreateTodoItem";
+import LocalStorageService from "./local-storage/LocalStorageService"
 
 
 function App() {
-    const [todoItems, setTodoItems] = React.useState([
-                {id: 1, title: "todo", description: "todo something", completed: false},
-                {id: 2, title: "todo", description: "todo something", completed: false},
-                {id: 3, title: "todo", description: "todo something", completed: false},
-                {id: 4, title: "todo", description: "todo something", completed: false}
-            ])
+    const localStorage = LocalStorageService("to-do-items")
+
+    const [todoItems, setTodoItems] = React.useState(
+        localStorage.getTodoItemsFromLocalStorage()
+    )
 
     function toggleTodoItem(id) {
-        setTodoItems(
-            todoItems.map(todoItem => {
-                if(todoItem.id === id) todoItem.completed = !todoItem.completed
-                return todoItem
-            })
-        )
+        let toggledTodoItems = todoItems.map(todoItem => {
+            if(todoItem.id === id) todoItem.completed = !todoItem.completed
+            return todoItem
+        })
+
+        localStorage.setTodoItemsInLocalStorage(toggledTodoItems)
+
+        setTodoItems(toggledTodoItems)
     }
 
     function createTodoItem(title, description) {
         const id = generateUniqueId()
 
-        setTodoItems(
-            todoItems.concat([{
-                id,
-                title,
-                description,
-                completed: false
-            }])
-        )
+        let newTodoItem = todoItems.concat([{
+            id,
+            title,
+            description,
+            completed: false
+        }])
+
+        localStorage.setTodoItemsInLocalStorage(newTodoItem)
+
+        setTodoItems(newTodoItem)
     }
 
     function removeTodoItem(id) {
-        setTodoItems(todoItems.filter(todoItem => todoItem.id !== id))
+        let filtredTodoItems = todoItems.filter(todoItem => todoItem.id !== id)
+
+        localStorage.setTodoItemsInLocalStorage(filtredTodoItems)
+
+        setTodoItems(filtredTodoItems)
     }
 
     function generateUniqueId() {
