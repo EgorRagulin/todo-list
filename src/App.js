@@ -1,28 +1,23 @@
 import React from 'react';
-
+import TodoList from "./todo/TodoList";
 
 function App() {
-  return (
-      <div className='wrapper'>
-        <div className="header">
+    const todoItems = [
+        {id: 1, title: "todo", description: "todo something", completed: false},
+        {id: 2, title: "todo", description: "todo something", completed: false},
+        {id: 3, title: "todo", description: "todo something", completed: false},
+        {id: 4, title: "todo", description: "todo something", completed: false},
+    ]
+
+    return (
+
+        <div className='wrapper'>
+            <h1>My todo-list</h1>
+
+            <TodoList todoItems={todoItems}/>
 
         </div>
-
-        <section className="to-do-list">
-          <ul>
-            <li>1 </li>
-            <li>2 </li>
-            <li>3 </li>
-            <li>4 </li>
-            <li>5 </li>
-          </ul>
-        </section>
-
-        <div className="footer">
-
-        </div>
-      </div>
-  );
+    );
 }
 
 export default App;
