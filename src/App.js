@@ -27,12 +27,19 @@ function App() {
     function createTodoItem(title, description) {
         const id = generateUniqueId()
 
-        let newTodoItem = todoItems.concat([{
-            id,
-            title,
-            description,
-            completed: false
-        }])
+        let newTodoItem = todoItems ?
+            todoItems.concat([{
+                id,
+                title,
+                description,
+                completed: false
+            }]) :
+            [{
+                id,
+                title,
+                description,
+                completed: false
+            }]
 
         localStorage.setTodoItemsInLocalStorage(newTodoItem)
 
@@ -50,7 +57,7 @@ function App() {
     function generateUniqueId() {
         let maxTodoItemId = 0
 
-        if (todoItems.length > 0) {
+        if (todoItems && todoItems.length > 0) {
             todoItems.forEach((todoItem => {
                 if(maxTodoItemId < todoItem.id) maxTodoItemId = todoItem.id
             }))
@@ -64,7 +71,7 @@ function App() {
             <div className="wrapper">
                 <h1>My todo-list</h1>
 
-                { (todoItems.length === 0) ?
+                { (!todoItems || todoItems.length === 0) ?
                     <TodoListIsEmpty /> :
                     <TodoList todoItems={todoItems} onChangeTodoItemSelection={toggleTodoItem}/>
                 }
